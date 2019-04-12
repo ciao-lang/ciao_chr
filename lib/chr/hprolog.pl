@@ -306,20 +306,19 @@ memberchk(X, [X|_]) :- !.
 memberchk(X, [_|L]) :- memberchk(X, L).
 
 
-:- use_module(engine(internals), ['$global_vars_get'/2]).
+:- use_module(engine(internals), ['$global_vars_get'/2, '$global_vars_set'/2]).
 :- use_module(library(mutables)).
 :- multifile(initial_gv_value/2).
 
 b_setval(Name,Value) :-
-	'$global_vars_get'(10, GV),
-	(
-	    var(GV) 
-	->
+	'$global_vars_get'(10, GV0),
+	( GV0 = 0 -> % (uninitialized)
             create_mutable(Value, Mutable), 
 	    empty_assoc(Assoc),
 	    put_assoc(Name, Assoc, Mutable, Assoc1), 
-            create_mutable(Assoc1, GV)
-	;
+            create_mutable(Assoc1, GV),
+	    '$global_vars_set'(10, GV)
+	;   GV = GV0,
             get_mutable(Assoc, GV),
             (
                 get_assoc(Name, Assoc, Mutable) ->
@@ -332,16 +331,15 @@ b_setval(Name,Value) :-
 	).
 
 b_getval(Name,Value) :-
-	'$global_vars_get'(10, GV),
-	(
-	    var(GV) 
-	->
+	'$global_vars_get'(10, GV0),
+	( GV0 = 0 -> % (uninitialized)
 	    initial_gv_value(Name, Value),
             create_mutable(Value, Mutable), 
 	    empty_assoc(Assoc),
 	    put_assoc(Name, Assoc, Mutable, Assoc1), 
-            create_mutable(Assoc1, GV)
-	;
+            create_mutable(Assoc1, GV),
+	    '$global_vars_set'(10, GV)
+	;   GV = GV0,
             get_mutable(Assoc, GV), 
 	    (
                 get_assoc(Name, Assoc, Mutable) 
