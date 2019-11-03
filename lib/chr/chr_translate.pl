@@ -4253,6 +4253,7 @@ guard_via_reschedule_main_new(PartnerLookups,GuardList,ActiveHead,
 % wrap_in_functor(Functor,X,Term) :-
 % 	Term =.. [Functor,X].
 
+% TODO: fix it, use hiord instead of hiord_old
 wrap_in_functor(X,Functor,Term) :-
 	Term =.. [Functor,X].
 %% Ciao end
@@ -4674,7 +4675,7 @@ head_arg_matches_([Arg-Var| Rest],[Mode|Modes],VarDict,GroundVars,GoalList,NVarD
 % This is because the call to is_ground/2 from the map predicate puts
 % "Args" as the first argument instead of the second one as we would
 % expect.
-
+% TODO: fix it, use hiord instead of hiord_old
 is_ground(GroundVars,Term) :-
 	is_ground1(Term,GroundVars).
 
