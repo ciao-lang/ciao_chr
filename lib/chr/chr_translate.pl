@@ -4248,15 +4248,8 @@ guard_via_reschedule_main_new(PartnerLookups,GuardList,ActiveHead,
 	sort(IndexedGuardListSkeleton,SortedIndexedGuardListSkeleton),
 	snd_of_pairs(SortedIndexedGuardListSkeleton,GuardListSkeleton).
 
-
-%% Ciao begin
-% wrap_in_functor(Functor,X,Term) :-
-% 	Term =.. [Functor,X].
-
-% TODO: fix it, use hiord instead of hiord_old
-wrap_in_functor(X,Functor,Term) :-
+wrap_in_functor(Functor,X,Term) :-
 	Term =.. [Functor,X].
-%% Ciao end
 
 wrappedunits2lists([],[],[],[]).
 wrappedunits2lists([unit(N,WrappedGoal,_,_)|Units],Gs,Ls,Ss) :-
@@ -4671,24 +4664,15 @@ head_arg_matches_([Arg-Var| Rest],[Mode|Modes],VarDict,GroundVars,GoalList,NVarD
    ),
    head_arg_matches_(Pairs,RestModes,VarDict1,GroundVars1,RestGoalList,NVarDict,NGroundVars).
 
-%% Ciao begin
-% This is because the call to is_ground/2 from the map predicate puts
-% "Args" as the first argument instead of the second one as we would
-% expect.
-% TODO: fix it, use hiord instead of hiord_old
 is_ground(GroundVars,Term) :-
-	is_ground1(Term,GroundVars).
-
-is_ground1(Term,GroundVars) :-
 	( ground(Term) -> 
 		true
 	; compound(Term) ->
 		Term =.. [_|Args],
-		maplist(is_ground1(GroundVars),Args)
+		maplist(is_ground(GroundVars),Args)
 	;
 		memberchk_eq(Term,GroundVars)
 	).
-%% Ciao end
 
 rest_heads_retrieval_and_matching(Heads,IDs,ActiveHead,GoalList,Susps,VarDict,NVarDict,PrevHs,PrevSusps,AttrDict) :-
 	rest_heads_retrieval_and_matching(Heads,IDs,ActiveHead,GoalList,Susps,VarDict,NVarDict,PrevHs,PrevSusps,AttrDict,[],_).
