@@ -28,6 +28,5 @@
 :- use_module(library(iso_misc), [compound/1]).
 :- use_module(library(sets), [merge/3]).
 
-:- set_prolog_flag( check_cycles, on ).
 'chr debug_event'(_).
 
