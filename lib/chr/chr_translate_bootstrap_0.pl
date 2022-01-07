@@ -134,7 +134,7 @@
 :- use_module(hprolog).
 :- use_module(pairlist).
 
-:- op(1100, xfy, ('|')).
+:- op(1105, xfy, ('|')).
 %% Ciao begin
 
 % :- initialization ().

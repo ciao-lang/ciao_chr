@@ -46,6 +46,6 @@
 :- op(1200, xfx, @).			% values from hProlog
 :- op(1190, xfx, pragma).		% values from hProlog
 :- op( 500, yfx, #).			% values from hProlog
-%:- op(1100, xfx, '|').
+%:- op(1105, xfx, '|').
 %:- op(1150, fx, chr_type).
 %:- op(1130, xfx, --->).
