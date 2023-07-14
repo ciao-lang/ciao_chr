@@ -5,7 +5,7 @@
 %:- use_module(library(chr)). % SWI
 
 %:- use_package(expander).
-%:- use_package(profiler).
+%:- use_package(profilercc).
 
 %:- all_cost_center.
 
