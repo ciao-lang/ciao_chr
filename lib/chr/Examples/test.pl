@@ -1,13 +1,7 @@
-
 :- module(test, [test/0]).
 
 :- use_package(chr). % Ciao
 %:- use_module(library(chr)). % SWI
-
-%:- use_package(expander).
-%:- use_package(profilercc).
-
-%:- all_cost_center.
 
 :- chr_constraint t/1.
 
